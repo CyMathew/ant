@@ -10,20 +10,26 @@ export default class Timer extends React.Component
             seconds: 0,
             minutes: 0,
             hours: 0,
-            minuteShow: false
+            minuteShow: false,
         };
         
         this.onClick = this.onClick.bind(this);
         this.tick = this.tick.bind(this);
         this.timeIncrement = this.timeIncrement.bind(this);
         this.resetInterval = this.resetInterval.bind(this);
+    }
 
+    componentWillMount()
+    {
         //Used to keep track of how many seconds left beofre calling timeIncrement and resetting
         //This is needed for when time is paused, in order synchronize the seconds with the timeIncrement function
         this.incrementTimeDur = 60000;
 
-        //Start the timer
-        this.onClick();
+    }
+
+    componentWillUnmount()
+    {
+        clearInterval(this.tickRate);
     }
 
     /**
@@ -54,9 +60,7 @@ export default class Timer extends React.Component
     tick()
     {
         let newTime = this.state.seconds +1;
-        this.setState({
-            seconds: newTime
-        });
+        this.setState({ seconds: newTime });
     }
 
     /**
@@ -96,6 +100,7 @@ export default class Timer extends React.Component
     {
         return (
             <div id="timer" onClick={this.onClick}>
+                <p>{this.props.match.params.name}</p>
                 {this.state.hours > 0 && <span id="hoursSpan">{this.state.hours}</span>}
                 {(this.state.minutes < 10 && this.state.minuteShow) && <span>0</span>}
                 {(this.state.minutes > 0 || this.state.minuteShow) && <span id="minutesSpan">{this.state.minutes}</span>}
