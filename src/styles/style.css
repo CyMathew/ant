@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css?family=Encode+Sans+Condensed:400,600');
+
+body
+{
+    font-family: 'Encode Sans Condensed', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#timer
+{
+    font-size: 100px;
+    border: 1px solid black;
+}
+
+#hoursSpan::after
+{
+    content: ':';
+}
+
+#minutesSpan::after
+{
+    content: ':';
+}
+
+a{
+    margin: 10px;
+}
+
+#topbar
+{
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    background-color:#F15F5C;
+    color: rgba(255, 255, 255, .8);
+    padding: 4px;
+    margin-bottom: 5px;
+    z-index: 10;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .35);
+}
+
+#menuButton
+{
+    fill: rgba(255, 255, 255, .8);
+    margin: 8px;
+    padding: 5px;
+}
+
+#sideMenu
+{
+    height: 100%;
+    width: 300px;
+    position: fixed;
+    z-index:5;
+    top: 0;
+    left: 0;
+    background-color: white;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: .5s;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, .3);
+}
+
+#sideMenuOverlay
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .025);
+    z-index: 4;
+}
+
+#sideMenu header
+{
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    height: 30px;
+    padding: 5px;
+    margin-left: 15px;
+    border-bottom: 2px solid rgba(0,0,0,.05);
+}
+
+#sideMenu h3
+{
+    color: black;
+}
+
+#plusButton
+{
+    fill: rgba(0, 0, 0, .35);
+    margin-left: auto;
+    margin-right: 8px;
+}
+
+#sideMenu h3
+{
+    display: block;
+}
