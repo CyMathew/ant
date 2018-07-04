@@ -10,6 +10,7 @@ body
 #timer
 {
     font-size: 100px;
+    text-align: center;
     border: 1px solid black;
 }
 
@@ -99,4 +100,18 @@ a{
 #sideMenu h3
 {
     display: block;
+}
+
+#projectLinks
+{
+    display: flex;
+    flex-flow: row nowrap;
+    margin-left: 15px;
+}
+
+#projectLinks a
+{
+    display: block;
+    text-decoration: none;
+    color: black;
 }

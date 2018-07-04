@@ -1,15 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 class AddField extends React.Component
 {
     constructor(props) {
         super(props);
-        this.state = {
-            links: [],
-            routes: []
-        };
 
         this.addLink = this.addLink.bind(this);
+        this.hideField = this.hideField.bind(this);
         this.inputRef = React.createRef();
     }
 
@@ -19,39 +17,34 @@ class AddField extends React.Component
         let name = this.inputRef.current.value;
         console.log(name);
 
-        this.setState((prevState) =>{
-                let tempArray = prevState.links.slice();
-                tempArray.push(name);
+        // this.setState((prevState) =>{
+        //         let tempArray = prevState.links.slice();
+        //         tempArray.push(name);
 
-                return ({ links: tempArray,
-                          routes: tempArray})
-            }
-        );
-        
+        //         return ({ links: tempArray,
+        //                   routes: tempArray})
+        //     }
+        // );
+
+        this.props.dispatch({type: "ADD_PROJECT", name});
         this.inputRef.current.value = "";
-        this.props.hide();
+        this.hideField();
+    }
+    
+    hideField()
+    {
+        this.props.dispatch({type: "AF_HIDE"});
     }
 
     render() 
     {
         return (
             <div>
-                <nav>
-                    {this.state.links.map((name, index) => (
-                        <Link key={index} to={"/" + name}>{name}</Link>
-                    ))}
-                </nav>
-                <div>
-                {this.state.routes.map((name, index) => (
-                        <Route path={"/" + name} key={name} component={Timer}/>
-                    ))}
-                </div>
-
-                {
-                    this.props.show && (
+                {   this.props.show && (
                     <form onSubmit={this.addLink}>
                         <input ref={this.inputRef} type="text" required/>
                         <button type="submit">Add</button>
+                        <button type="button" onClick={this.hideField}>Cancel</button>
                     </form>    
                     ) 
                 }
@@ -59,5 +52,6 @@ class AddField extends React.Component
             </div>
         );
     }
-    
 }
+
+export default connect()(AddField);

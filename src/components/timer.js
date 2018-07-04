@@ -100,7 +100,6 @@ export default class Timer extends React.Component
     {
         return (
             <div id="timer" onClick={this.onClick}>
-                <p>{this.props.match.params.name}</p>
                 {this.state.hours > 0 && <span id="hoursSpan">{this.state.hours}</span>}
                 {(this.state.minutes < 10 && this.state.minuteShow) && <span>0</span>}
                 {(this.state.minutes > 0 || this.state.minuteShow) && <span id="minutesSpan">{this.state.minutes}</span>}
