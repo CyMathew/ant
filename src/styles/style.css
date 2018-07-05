@@ -102,17 +102,17 @@ a{
     display: block;
 }
 
-#projectLinks
+#projects
 {
     margin-left: 15px;
 }
 
-#projectLinks nav
+#projects nav
 {
     margin-left: 10px;
 }
 
-#projectLinks a
+#projects a
 {
     display: flex;
     flex-flow: row nowrap;
@@ -124,12 +124,12 @@ a{
     transition: background-color .25s ease-in-out;
 }
 
-#projectLinks a:hover
+#projects a:hover
 {
     background-color: rgba(0, 0, 0, .035);
 }
 
-#projectLinks a>button
+#projects a>button
 {
     margin-left: auto;
     margin-right: 15px;
@@ -139,7 +139,7 @@ a{
     transition: color .35s;
 }
 
-#projectLinks a:hover>button
+#projects a:hover>button
 {
     color: black;
 }

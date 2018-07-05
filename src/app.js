@@ -4,10 +4,11 @@ import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
-import Topbar from './components/topbar';
-import Timer from './components/timer';
+import {v4} from 'node-uuid';
 
 import {loadState, saveState} from './components/localstore';
+import Topbar from './components/topbar';
+import Timer from './components/timer';
 
 const initialState = {
     projects: [],
@@ -27,7 +28,7 @@ function reducer(state = initialState, action)
         case "AF_HIDE": return {...state, showAddField: false};
         case "ADD_PROJECT": 
         {
-            let newProject = {name: action.name, time: {}};
+            let newProject = {id:v4(), name: action.name, time: {}};
             let newArray = state.projects.concat(newProject);
             return {...state, projects: newArray};
         }
@@ -62,8 +63,8 @@ class App extends React.Component
             <div>
                 <Topbar />
                 <div>
-                {store.getState().projects.map(({name, time}, index) => (
-                        <Route path={"/" + name} key={index} render={()=><Timer id={index} savedTime={time}/>}/>
+                {store.getState().projects.map(({id, time}, index) => (
+                        <Route path={"/" + id} key={id} render={()=><Timer id={index} savedTime={time}/>}/>
                     ))}
                 </div>
             </div>

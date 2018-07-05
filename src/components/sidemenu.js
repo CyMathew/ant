@@ -38,8 +38,8 @@ class SideMenu extends React.Component
                         </header>
                         <div id="projects">
                             <nav>
-                                {this.props.projects.map(({name}, index) => (
-                                    <Link to={"/" + name} key={index} onClick={this.props.toggleMenu}>{name}
+                                {this.props.projects.map(({id, name}, index) => (
+                                    <Link to={"/" + id} key={id} onClick={this.props.toggleMenu}>{name}
                                         <button type="button" onClick={this.deleteProject.bind(this, index)}>&#x2716;</button>
                                     </Link>
                                 ))}
