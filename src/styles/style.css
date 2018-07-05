@@ -7,11 +7,41 @@ body
     padding: 0;
 }
 
+#timerBlock
+{
+    position: relative;
+    width: 100%;
+}
+
 #timer
 {
     font-size: 100px;
     text-align: center;
-    border: 1px solid black;
+}
+
+#pause
+{
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+
+#pause:after
+{
+    content: "";
+    clear: both;
+}
+
+.smallMessage
+{
+    text-align: center;
+    font-size: 12px;
+    margin: 2px;
+    padding: 5px 8px 8px 8px;
+    background-color: rgba(0, 0, 0, .7);
+    color: white;
+    width: 60px;
+    border-radius: 5px;
 }
 
 #hoursSpan::after

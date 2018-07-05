@@ -17,6 +17,7 @@ class Timer extends React.Component
             minutes: 0,
             hours: 0,
             minuteShow: false,
+            pauseShow: false
         };
         
         this.onClick = this.onClick.bind(this);
@@ -70,6 +71,7 @@ class Timer extends React.Component
             // console.log('tickrate started');
             this.tickRate = setInterval(this.tick, 1000);
             this.secChange = setInterval(this.timeIncrement, this.incrementTimeDur);
+            this.setState({pauseShow: false});
         }
         else    //If timer is clicked while timer was running, pause
         {
@@ -78,6 +80,7 @@ class Timer extends React.Component
             clearInterval(this.tickRate);
             clearInterval(this.secChange);
             this.tickRate = 0;
+            this.setState({pauseShow: true});
         }
     }
 
@@ -128,12 +131,15 @@ class Timer extends React.Component
     render() 
     {
         return (
-            <div id="timer" onClick={this.onClick}>
-                {this.state.hours > 0 && <span id="hoursSpan">{this.state.hours}</span>}
-                {(this.state.minutes < 10 && this.state.minuteShow) && <span>0</span>}
-                {(this.state.minutes > 0 || this.state.minuteShow) && <span id="minutesSpan">{this.state.minutes}</span>}
-                {this.state.seconds < 10 && <span>0</span>}
-                <span id="secondSpan">{this.state.seconds}</span>
+            <div id="timerBlock">
+                <div id="timer" onClick={this.onClick}>
+                    {this.state.hours > 0 && <span id="hoursSpan">{this.state.hours}</span>}
+                    {(this.state.minutes < 10 && this.state.minuteShow) && <span>0</span>}
+                    {(this.state.minutes > 0 || this.state.minuteShow) && <span id="minutesSpan">{this.state.minutes}</span>}
+                    {this.state.seconds < 10 && <span>0</span>}
+                    <span id="secondSpan">{this.state.seconds}</span>
+                </div>
+                {this.state.pauseShow && <div id="pause" className="smallMessage">&#9616;&nbsp;&#9612; Paused</div>}
             </div>
         );
     }
