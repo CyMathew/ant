@@ -18,6 +18,12 @@ class SideMenu extends React.Component
         this.props.dispatch({type: "AF_SHOW"});
     }
 
+    deleteProject(index)
+    {
+        console.log("Index " + index + " is being deleted");
+        this.props.dispatch({type: "RM_PROJECT", index});
+    }
+
     render()
     {       
         if(this.props.show)
@@ -30,10 +36,12 @@ class SideMenu extends React.Component
                                 <path d="M28,14H18V4c0-1.104-0.896-2-2-2s-2,0.896-2,2v10H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h10v10c0,1.104,0.896,2,2,2  s2-0.896,2-2V18h10c1.104,0,2-0.896,2-2S29.104,14,28,14z"/>
                             </svg>
                         </header>
-                        <div id="projectLinks">
+                        <div id="projects">
                             <nav>
-                                {this.props.projectLinks.map((name, index) => (
-                                    <Link to={"/" + name} key={index} onClick={this.props.toggleMenu}>{name}</Link>
+                                {this.props.projects.map(({name}, index) => (
+                                    <Link to={"/" + name} key={index} onClick={this.props.toggleMenu}>{name}
+                                        <button type="button" onClick={this.deleteProject.bind(this, index)}>&#x2716;</button>
+                                    </Link>
                                 ))}
                             </nav> 
                         </div>
@@ -51,7 +59,7 @@ class SideMenu extends React.Component
 const mapStateToProps = (state) =>
 ({
     showAddField: state.showAddField,
-    projectLinks: state.projectLinks
+    projects: state.projects
 });
 
 export default connect(mapStateToProps)(SideMenu);

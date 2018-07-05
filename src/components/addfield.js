@@ -15,16 +15,6 @@ class AddField extends React.Component
     {   
         event.preventDefault();
         let name = this.inputRef.current.value;
-        console.log(name);
-
-        // this.setState((prevState) =>{
-        //         let tempArray = prevState.links.slice();
-        //         tempArray.push(name);
-
-        //         return ({ links: tempArray,
-        //                   routes: tempArray})
-        //     }
-        // );
 
         this.props.dispatch({type: "ADD_PROJECT", name});
         this.inputRef.current.value = "";

@@ -104,14 +104,42 @@ a{
 
 #projectLinks
 {
-    display: flex;
-    flex-flow: row nowrap;
     margin-left: 15px;
+}
+
+#projectLinks nav
+{
+    margin-left: 10px;
 }
 
 #projectLinks a
 {
-    display: block;
+    display: flex;
+    flex-flow: row nowrap;
     text-decoration: none;
+    color: black;
+    margin: 5px 0px;
+    padding: 5px;
+    width: 100%;
+    transition: background-color .25s ease-in-out;
+}
+
+#projectLinks a:hover
+{
+    background-color: rgba(0, 0, 0, .035);
+}
+
+#projectLinks a>button
+{
+    margin-left: auto;
+    margin-right: 15px;
+    background-color: transparent;
+    color: transparent;
+    border: none;
+    transition: color .35s;
+}
+
+#projectLinks a:hover>button
+{
     color: black;
 }

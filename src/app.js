@@ -7,12 +7,15 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Topbar from './components/topbar';
 import Timer from './components/timer';
 
+import {loadState, saveState} from './components/localstore';
+
 const initialState = {
-    projectLinks: [],
+    projects: [],
     showSideMenu: false,
     showAddField: false
 }
 
+const persistedState = loadState();
 
 function reducer(state = initialState, action) 
 {
@@ -22,15 +25,35 @@ function reducer(state = initialState, action)
         case "SM_HIDE": return {...state, showSideMenu: false};
         case "AF_SHOW": return {...state, showAddField: true };
         case "AF_HIDE": return {...state, showAddField: false};
-        case "ADD_PROJECT": let newArray = state.projectLinks.concat(action.name);
-                        return {...state, projectLinks: newArray};
+        case "ADD_PROJECT": 
+        {
+            let newProject = {name: action.name, time: {}};
+            let newArray = state.projects.concat(newProject);
+            return {...state, projects: newArray};
+        }
+        case "RM_PROJECT": 
+        {
+            let newArray = state.projects.concat();
+            newArray.splice(action.index, 1);
+            return {...state, projects: newArray};
+        }
+        case "SAVE_TIME":
+        {
+            let newTime = Object.assign({}, action.payload.savedTime);
+            state.projects[action.payload.index].time = newTime;
+            return state;
+        }
         default: return state;
     }
 };
 
 
-const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const store = createStore(reducer, persistedState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
+
+store.subscribe(()=> {
+    saveState(store.getState());
+})
 
 class App extends React.Component
 {
@@ -39,8 +62,8 @@ class App extends React.Component
             <div>
                 <Topbar />
                 <div>
-                {store.getState().projectLinks.map((name, index) => (
-                        <Route path={"/" + name} key={index} component={Timer}/>
+                {store.getState().projects.map(({name, time}, index) => (
+                        <Route path={"/" + name} key={index} render={()=><Timer id={index} savedTime={time}/>}/>
                     ))}
                 </div>
             </div>

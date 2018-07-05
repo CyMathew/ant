@@ -1,6 +1,7 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
-export default class Timer extends React.Component
+class Timer extends React.Component
 {
     constructor(props) 
     {
@@ -24,12 +25,19 @@ export default class Timer extends React.Component
         //Used to keep track of how many seconds left beofre calling timeIncrement and resetting
         //This is needed for when time is paused, in order synchronize the seconds with the timeIncrement function
         this.incrementTimeDur = 60000;
+        this.setState(this.props.savedTime);
 
     }
 
     componentWillUnmount()
     {
         clearInterval(this.tickRate);
+        let savedTime = this.state;
+        let index = this.props.id;
+        this.props.dispatch({
+            type: "SAVE_TIME", 
+            payload: {index, savedTime}
+        });
     }
 
     /**
@@ -109,3 +117,6 @@ export default class Timer extends React.Component
         );
     }
 };
+
+
+export default connect()(Timer);
